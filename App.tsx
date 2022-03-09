@@ -31,15 +31,28 @@ const App: React.FC = () => {
 
   // 원하는 카메라의 사이즈를 지정한다.
   const CAMERA_SIZE = { height: 480, width: 320 };
-  
+
   // 텐서 플로우가 준비가 되었는지 여부 
   const [isTfReady, setIsTfReady] = useState<boolean>(false);
 
   useEffect(() => {
     (async () => {
+      await fn_requestPermisison();
       await fn_tfReady();
     })()
   }, [])
+
+
+  /**
+   * 카메라 권한 요청 함수
+   */
+  const fn_requestPermisison = async () => {
+    const { status } = (await Camera.requestCameraPermissionsAsync())
+    if (status !== 'granted') {
+      console.log("카메라의 권한 요청이 승인 되지 않았습니다.")
+      return;
+    }
+  };
 
 
   /**
@@ -98,8 +111,7 @@ const App: React.FC = () => {
     const canvas = canvasRef.current;
     if (canvas) {
       const ctx = canvas.getContext('2d');
-      ctx.strokeStyle = "red"
-      ctx.lineWidth = 6;
+
 
       for (let i = 0; i < predictions.length; i++) {
         const start = predictions[i].topLeft;
@@ -109,7 +121,8 @@ const App: React.FC = () => {
         // 그려 줄 캔버스 사이즈 지정
         canvas.height = CAMERA_SIZE.height;
         canvas.width = CAMERA_SIZE.width;
-
+        ctx.strokeStyle = "red"
+        ctx.lineWidth = 6;
         // 화면상에 Rect를 그려준다.
         ctx.strokeRect(start[0], start[1], size[0], size[1]);
       }
