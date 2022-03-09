@@ -15,6 +15,7 @@
     "eject": "expo eject"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^1.16.1",
     "@tensorflow-models/blazeface": "^0.0.7",
     "@tensorflow/tfjs": "^3.14.0",
     "@tensorflow/tfjs-backend-webgl": "^3.14.0",
@@ -24,12 +25,15 @@
     "@types/react-native-canvas": "^0.1.8",
     "expo": "~44.0.0",
     "expo-camera": "^12.1.2",
+    "expo-gl": "^11.1.2",
     "expo-status-bar": "~1.2.0",
     "react": "17.0.1",
     "react-dom": "17.0.1",
     "react-native": "0.64.3",
     "react-native-canvas": "^0.1.38",
-    "react-native-web": "0.17.1"
+    "react-native-fs": "^2.19.0",
+    "react-native-web": "0.17.1",
+    "react-native-webview": "^11.17.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.9",
